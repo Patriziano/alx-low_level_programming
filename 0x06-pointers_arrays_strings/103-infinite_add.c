@@ -3,7 +3,7 @@
 /**
  * infinite_add - adds two number
  *
- * @n: first number
+ * @n1: first number
  * @n2: second number
  * @r: buffer
  * @size_r: buffer size:

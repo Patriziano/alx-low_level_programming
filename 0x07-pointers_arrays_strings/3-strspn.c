@@ -1,37 +1,31 @@
 #include "main.h"
 
 /**
-*_strspn - gets the length of a prefix substring
-*@s: first string
-*@accept: second string
-*
-*Return: a pointer to the byte in s or '\0'
-*/
+ * _strspn - gets the length of a prefix substring.
+ * @s: initial segment.
+ * @accept: accepted bytes.
+ * Return: the number of accepted bytes.
+ */
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int count = 0;
-	char *p;
+	unsigned int i, j, bool;
 
-	for (; *s; s++)
+	for (i = 0; *(s + i) != '\0'; i++)
 	{
-	for (p = accept; *p; p++)
-	{
-	if (*s == *p)
-	{
-	count++;
-	break;
+		bool = 1;
+		for (j = 0; *(accept + j) != '\0'; j++)
+		{
+			if (*(s + i) == *(accept + j))
+			{
+				bool = 0;
+				break;
+			}
+		}
+		if (bool == 1)
+			break;
 	}
-	}
-	if (!*p)
-	return count;
-	}
-
-	return (count);
+	return (i);
 }
-
-
-
-
 
 
 

@@ -10,7 +10,7 @@
 char *_memcpy(char *dest, char *src, unsigned int n)
 {
 	char *dst_ptr = dest;
-	const char *src_ptr = src;
+	char *src_ptr = src;
 
 	while (n-- > 0)
 	{

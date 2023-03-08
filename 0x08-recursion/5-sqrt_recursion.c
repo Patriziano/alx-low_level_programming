@@ -2,8 +2,10 @@
 
 /**
 *_sqrt_recursion - function that returns the natural square root of a number
-*_sqrt_helper - searches for square root
+*sqrt_helper - searches for square root
 *@n: number to find square root of
+*@high: upper search range
+*@low: lower search range
 *Return: -1 if n does not have a natural square root
 */
 int sqrt_helper(int n, int low, int high);
@@ -17,16 +19,20 @@ int _sqrt_recursion(int n)
 	{
 		return (0);
 	}
+	else if (n == 1)
+	{
+		return (1);
+	}
 	else
 	{
 		return (sqrt_helper(n, 1, n));
 	}
 }
 /**
-*_sqrt_helper - searches for square root
+*sqrt_helper - searches for square root
 *@high: upper search range
 *@low: lower search range
-*n: number to find square root of
+*@n: number to find square root of
 *Return: natural square root of n
 */
 int sqrt_helper(int n, int low, int high)

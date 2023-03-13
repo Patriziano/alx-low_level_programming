@@ -11,11 +11,15 @@
 char *_strdup(char *str)
 {
 	char *dup_str;
-	unsigned int i = 0;
+	unsigned int i, j;
 
 	if (str == NULL)
 	{
 		return (NULL);
+	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		;
 	}
 	dup_str = (char *) malloc(sizeof(char) * (i + 1));
 
@@ -23,7 +27,8 @@ char *_strdup(char *str)
 	{
 		return (NULL);
 	}
-	dup_str[i] =  str[i];
+	for (j = 0; j <= i; j++)
+		dup_str[j] =  str[j];
 
 	return (dup_str);
 }

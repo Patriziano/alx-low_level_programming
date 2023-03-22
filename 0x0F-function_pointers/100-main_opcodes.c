@@ -2,49 +2,39 @@
 #include <stdlib.h>
 
 /**
-*print_opcodes -  prints the opcodes of its own main function
-*@n: number of bytes
-*
-*Return: 0 Always
-*/
-void print_opcodes(int n)
-{
-	unsigned char *p = (unsigned char *)&print_opcodes;
-	unsigned int i;
-
-	for (i = 0; i < n; i++)
-	{
-		printf("%02x", *(p + i));
-	}
-	if ((i + 1) % 2 == 0 && i != n - 1)
-	{
-		printf(" ");
-	}
-	printf("\n");
-}
-
-/**
-*main - checks the program is invocked by one argument
-*@argc: number of argument
-*@argv: argument vector
-*
-*Return: Nothing
-*/
+ * main - check the code for Holberton School students.
+ * @argc: argument count.
+ * @argv: argument vector.
+ *
+ * Return: Always 0.
+ */
 int main(int argc, char *argv[])
 {
-	int n;
+	char *opc = (char *) main;
+	int i, nbytes;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
-	n  = atoi(argv[1]);
-	if (n <= 0)
+
+	nbytes = atoi(argv[1]);
+
+	if (nbytes < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
-	print_opcodes(n);
+
+	for (i = 0; i < nbytes; i++)
+	{
+		printf("%02x", opc[i] & 0xFF);
+		if (i != nbytes - 1)
+			printf(" ");
+	}
+
+	printf("\n");
 	return (0);
 }
+

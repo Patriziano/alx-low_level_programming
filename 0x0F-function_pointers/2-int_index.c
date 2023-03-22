@@ -2,7 +2,7 @@
 
 /**
 *int_index - function that searches for an integer
-*@:cmp: pointer to the function
+*@cmp: pointer to the function
 *@array: array name
 *@size: number of elements in the array
 *

@@ -1,1 +1,1 @@
-Project on Function pointers on C programming
+Project on Function pointers in C programming

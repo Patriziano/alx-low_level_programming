@@ -4,7 +4,7 @@
 
 /**
 *print_listint - prints all the elements of linked list
-*@h: head 
+*@h: head
 *
 *Return: all the elements of a list
 */
@@ -16,16 +16,16 @@ size_t print_listint(const listint_t *h)
 
 	while (h != NULL)
 	{
-		if (h -> str != NULL)
+		if (h != NULL)
 		{
-			printf("[%u] %s\n", h->len, h->str);
+			printf("%d\n", h->n);
 		}
 		else
 		{
 			printf("[0] nil\n");
 		}
 	count_t++;
-	h = h->next->next;
+	h = h->next;
 
 	}
 	return (count_t);

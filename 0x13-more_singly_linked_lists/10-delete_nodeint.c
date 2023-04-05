@@ -23,7 +23,7 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 		free(current_node);
 		return (1);
 	}
-	
+
 	deleted_node = NULL;
 	current_node = *head;
 	for (j = 0; j < index && current_node != NULL; j++)

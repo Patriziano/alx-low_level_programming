@@ -6,6 +6,7 @@
 *@n: input number unsigned long int
 *@index: index starting from 0 of the expected bit
 *
+*Return: 1
 */
 int set_bit(unsigned long int *n, unsigned int index)
 {

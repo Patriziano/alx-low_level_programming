@@ -10,10 +10,10 @@ int get_endianness(void)
 	int num;
 	char *byte;
 
-	num = 34563978;
+	num = 0x034563978;
 	byte = (char *)&num;
 
-	if (*byte == 78)
+	if (*byte == 0x078)
 	{
 		return (1);
 	}

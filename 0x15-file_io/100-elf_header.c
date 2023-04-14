@@ -14,7 +14,7 @@
 void print_addr(char *ptr)
 {
 	int i;
-	int start;
+	int begin;
 	char sys;
 
 	printf("  Entry point address:               0x");
@@ -22,9 +22,9 @@ void print_addr(char *ptr)
 	sys = ptr[4] + '0';
 	if (sys == '1')
 	{
-		start = 26;
+		begin = 26;
 		printf("80");
-		for (i = start; i >= 22; i--)
+		for (i = begin; i >= 22; i--)
 		{
 			if (ptr[i] > 0)
 				printf("%x", ptr[i]);
@@ -37,8 +37,8 @@ void print_addr(char *ptr)
 
 	if (sys == '2')
 	{
-		start = 26;
-		for (i = start; i > 23; i--)
+		begin = 26;
+		for (i = begin; i > 23; i--)
 		{
 			if (ptr[i] >= 0)
 				printf("%02x", ptr[i]);
@@ -154,7 +154,7 @@ void print_magic(char *ptr)
 }
 
 /**
- * check_sys - check the version sys.
+ * check_sys - check the version system.
  * @ptr: magic.
  * Return: no return.
  */
@@ -165,7 +165,7 @@ void check_sys(char *ptr)
 	if (sys == '0')
 		exit(98);
 
-	printf("LF Header:\n");
+	printf("ELF Header:\n");
 	print_magic(ptr);
 
 	if (sys == '1')
@@ -207,7 +207,7 @@ int check_elf(char *ptr)
  */
 int main(int argc, char *argv[])
 {
-	int fp, read_bytes;
+	int fd, ret_read;
 	char ptr[27];
 
 	if (argc != 2)
@@ -216,18 +216,18 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	fp = open(argv[1], O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 
-	if (fp < 0)
+	if (fd < 0)
 	{
 		dprintf(STDERR_FILENO, "Err: file can not be open\n");
 		exit(98);
 	}
 
-	lseek(fp, 0, SEEK_SET);
-	read_bytes = read(fp, ptr, 27);
+	lseek(fd, 0, SEEK_SET);
+	ret_read = read(fd, ptr, 27);
 
-	if (read_bytes == -1)
+	if (ret_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Err: The file can not be read\n");
 		exit(98);
@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
 	}
 
 	check_sys(ptr);
-	close(fp);
+	close(fd);
 
 	return (0);
 }

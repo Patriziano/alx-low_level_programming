@@ -14,17 +14,17 @@
 void print_addr(char *ptr)
 {
 	int i;
-	int begin;
-	char sys;
+	int start;
+	char systemtem;
 
 	printf("  Entry point address:               0x");
 
-	sys = ptr[4] + '0';
-	if (sys == '1')
+	systemtem = ptr[4] + '0';
+	if (systemtem == '1')
 	{
-		begin = 26;
+		start = 26;
 		printf("80");
-		for (i = begin; i >= 22; i--)
+		for (i = start; i >= 22; i--)
 		{
 			if (ptr[i] > 0)
 				printf("%x", ptr[i]);
@@ -35,10 +35,10 @@ void print_addr(char *ptr)
 			printf("00");
 	}
 
-	if (sys == '2')
+	if (systemtem == '2')
 	{
-		begin = 26;
-		for (i = begin; i > 23; i--)
+		start = 26;
+		for (i = start; i > 23; i--)
 		{
 			if (ptr[i] >= 0)
 				printf("%02x", ptr[i]);
@@ -52,32 +52,32 @@ void print_addr(char *ptr)
 }
 
 /**
- * print_type - prints type
+ * print_var - prints var
  * @ptr: magic.
  * Return: no return.
  */
-void print_type(char *ptr)
+void print_var(char *ptr)
 {
-	char type = ptr[16];
+	char var = ptr[16];
 
 	if (ptr[5] == 1)
-		type = ptr[16];
+		var = ptr[16];
 	else
-		type = ptr[17];
+		var = ptr[17];
 
 	printf("  Type:                              ");
-	if (type == 0)
-		printf("NONE (No file type)\n");
-	else if (type == 1)
+	if (var == 0)
+		printf("NONE (No file var)\n");
+	else if (var == 1)
 		printf("REL (Relocatable file)\n");
-	else if (type == 2)
+	else if (var == 2)
 		printf("EXEC (Executable file)\n");
-	else if (type == 3)
+	else if (var == 3)
 		printf("DYN (Shared object file)\n");
-	else if (type == 4)
+	else if (var == 4)
 		printf("CORE (Core file)\n");
 	else
-		printf("<unknown: %x>\n", type);
+		printf("<unknown: %x>\n", var);
 }
 
 /**
@@ -154,30 +154,30 @@ void print_magic(char *ptr)
 }
 
 /**
- * check_sys - check the version system.
+ * check_system - check the version systemtem.
  * @ptr: magic.
  * Return: no return.
  */
-void check_sys(char *ptr)
+void check_system(char *ptr)
 {
-	char sys = ptr[4] + '0';
+	char system = ptr[4] + '0';
 
-	if (sys == '0')
+	if (system == '0')
 		exit(98);
 
-	printf("ELF Header:\n");
+	printf("LF Header:\n");
 	print_magic(ptr);
 
-	if (sys == '1')
+	if (system == '1')
 		printf("  Class:                             ELF32\n");
 
-	if (sys == '2')
+	if (system == '2')
 		printf("  Class:                             ELF64\n");
 
 	print_data(ptr);
 	print_version(ptr);
 	print_osabi(ptr);
-	print_type(ptr);
+	print_var(ptr);
 	print_addr(ptr);
 }
 
@@ -207,7 +207,7 @@ int check_elf(char *ptr)
  */
 int main(int argc, char *argv[])
 {
-	int fd, ret_read;
+	int fp, read_bytes;
 	char ptr[27];
 
 	if (argc != 2)
@@ -216,18 +216,18 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	fd = open(argv[1], O_RDONLY);
+	fp = open(argv[1], O_RDONLY);
 
-	if (fd < 0)
+	if (fp < 0)
 	{
 		dprintf(STDERR_FILENO, "Err: file can not be open\n");
 		exit(98);
 	}
 
-	lseek(fd, 0, SEEK_SET);
-	ret_read = read(fd, ptr, 27);
+	lseek(fp, 0, SEEK_SET);
+	read_bytes = read(fp, ptr, 27);
 
-	if (ret_read == -1)
+	if (read_bytes == -1)
 	{
 		dprintf(STDERR_FILENO, "Err: The file can not be read\n");
 		exit(98);
@@ -239,8 +239,8 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	check_sys(ptr);
-	close(fd);
+	check_system(ptr);
+	close(fp);
 
 	return (0);
 }

@@ -15,12 +15,12 @@ void print_addr(char *ptr)
 {
 	int i;
 	int start;
-	char systemtem;
+	char system;
 
 	printf("  Entry point address:               0x");
 
-	systemtem = ptr[4] + '0';
-	if (systemtem == '1')
+	system = ptr[4] + '0';
+	if (system == '1')
 	{
 		start = 26;
 		printf("80");
@@ -35,7 +35,7 @@ void print_addr(char *ptr)
 			printf("00");
 	}
 
-	if (systemtem == '2')
+	if (system == '2')
 	{
 		start = 26;
 		for (i = start; i > 23; i--)
@@ -52,32 +52,32 @@ void print_addr(char *ptr)
 }
 
 /**
- * print_var - prints var
+ * print_types - prints types
  * @ptr: magic.
  * Return: no return.
  */
-void print_var(char *ptr)
+void print_types(char *ptr)
 {
-	char var = ptr[16];
+	char types = ptr[16];
 
 	if (ptr[5] == 1)
-		var = ptr[16];
+		types = ptr[16];
 	else
-		var = ptr[17];
+		types = ptr[17];
 
 	printf("  Type:                              ");
-	if (var == 0)
-		printf("NONE (No file var)\n");
-	else if (var == 1)
+	if (types == 0)
+		printf("NONE (No file types)\n");
+	else if (types == 1)
 		printf("REL (Relocatable file)\n");
-	else if (var == 2)
+	else if (types == 2)
 		printf("EXEC (Executable file)\n");
-	else if (var == 3)
+	else if (types == 3)
 		printf("DYN (Shared object file)\n");
-	else if (var == 4)
+	else if (types == 4)
 		printf("CORE (Core file)\n");
 	else
-		printf("<unknown: %x>\n", var);
+		printf("<unknown: %x>\n", types);
 }
 
 /**
@@ -154,7 +154,7 @@ void print_magic(char *ptr)
 }
 
 /**
- * check_system - check the version systemtem.
+ * check_system - check the version system.
  * @ptr: magic.
  * Return: no return.
  */
@@ -177,7 +177,7 @@ void check_system(char *ptr)
 	print_data(ptr);
 	print_version(ptr);
 	print_osabi(ptr);
-	print_var(ptr);
+	print_types(ptr);
 	print_addr(ptr);
 }
 

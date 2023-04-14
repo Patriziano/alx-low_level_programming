@@ -15,12 +15,12 @@ void print_addr(char *ptr)
 {
 	int i;
 	int start;
-	char system;
+	char sys;
 
 	printf("  Entry point address:               0x");
 
-	system = ptr[4] + '0';
-	if (system == '1')
+	sys = ptr[4] + '0';
+	if (sys == '1')
 	{
 		start = 26;
 		printf("80");
@@ -35,7 +35,7 @@ void print_addr(char *ptr)
 			printf("00");
 	}
 
-	if (system == '2')
+	if (sys == '2')
 	{
 		start = 26;
 		for (i = start; i > 23; i--)
@@ -154,24 +154,24 @@ void print_magic(char *ptr)
 }
 
 /**
- * check_system - check the version system.
+ * check_sys - check the version sys.
  * @ptr: magic.
  * Return: no return.
  */
-void check_system(char *ptr)
+void check_sys(char *ptr)
 {
-	char system = ptr[4] + '0';
+	char sys = ptr[4] + '0';
 
-	if (system == '0')
+	if (sys == '0')
 		exit(98);
 
 	printf("LF Header:\n");
 	print_magic(ptr);
 
-	if (system == '1')
+	if (sys == '1')
 		printf("  Class:                             ELF32\n");
 
-	if (system == '2')
+	if (sys == '2')
 		printf("  Class:                             ELF64\n");
 
 	print_data(ptr);
@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	check_system(ptr);
+	check_sys(ptr);
 	close(fp);
 
 	return (0);

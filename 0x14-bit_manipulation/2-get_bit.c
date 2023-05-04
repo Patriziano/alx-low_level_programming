@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
-*get_bit - function that returns the value of a bit 
+*get_bit - function that returns the value of a bit
 *at a given index
 *@n: unsigned long int
 *@index: index from 0 of the expected bit

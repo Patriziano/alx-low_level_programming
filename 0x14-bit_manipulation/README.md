@@ -1,1 +1,1 @@
-A project on Bit manipulation using C programming
+A project on Bit manipulation using C Programming

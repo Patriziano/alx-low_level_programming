@@ -2,10 +2,9 @@
 
 
 /**
- * hash_table_set - Add or update an element in the hash table.
+ * hash_table_get - Add or update an element in the hash table.
  * @ht: The hash table.
  * @key: The key to add or update.
- * @value: The value associated with the key.
  *
  * Return: 1 if successful, 0 otherwise.
  */
